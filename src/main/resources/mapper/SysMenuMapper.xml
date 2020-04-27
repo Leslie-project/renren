@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leslie.renren.dao.mybatis.ISysMenuDao">
+
+    <resultMap id="BaseResultMap" type="com.leslie.renren.entity.SysMenuEntity">
+        <result column="menu_id" property="menuId" jdbcType="INTEGER"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="perms" property="perms" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="icon" property="icon" jdbcType="VARCHAR"/>
+        <result column="order_num" property="orderNum" jdbcType="INTEGER"/>
+    </resultMap>
+    <!-- 查询基础字段-->
+    <sql id="Base_Column_List">
+        menu_id,parent_id,name,url,perms,type,icon,order_num
+    </sql>
+    <!-- 插入基础字段-->
+    <sql id="Base_Insert_Column_List">
+        menu_id,parent_id,name,url,perms,type,icon,order_num
+    </sql>
+    <!-- 批量插入-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Insert_Column_List"/>
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.menuId},#{item.parentId},#{item.name},#{item.url},#{item.perms},#{item.type},#{item.icon},#{item.orderNum}
+            </trim>
+        </foreach>
+    </insert>
+</mapper>

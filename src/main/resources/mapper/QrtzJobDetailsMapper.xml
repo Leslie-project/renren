@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leslie.renren.dao.mybatis.IQrtzJobDetailsDao">
+
+    <resultMap id="BaseResultMap" type="com.leslie.renren.entity.QrtzJobDetailsEntity">
+        <result column="SCHED_NAME" property="schedName" jdbcType="VARCHAR"/>
+        <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR"/>
+        <result column="JOB_GROUP" property="jobGroup" jdbcType="VARCHAR"/>
+        <result column="DESCRIPTION" property="description" jdbcType="VARCHAR"/>
+        <result column="JOB_CLASS_NAME" property="jobClassName" jdbcType="VARCHAR"/>
+        <result column="IS_DURABLE" property="isDurable" jdbcType="VARCHAR"/>
+        <result column="IS_NONCONCURRENT" property="isNonconcurrent" jdbcType="VARCHAR"/>
+        <result column="IS_UPDATE_DATA" property="isUpdateData" jdbcType="VARCHAR"/>
+        <result column="REQUESTS_RECOVERY" property="requestsRecovery" jdbcType="VARCHAR"/>
+        <result column="JOB_DATA" property="jobData" jdbcType="BLOB"/>
+    </resultMap>
+    <!-- 查询基础字段-->
+    <sql id="Base_Column_List">
+        SCHED_NAME,JOB_NAME,JOB_GROUP,DESCRIPTION,JOB_CLASS_NAME,IS_DURABLE,IS_NONCONCURRENT,IS_UPDATE_DATA,REQUESTS_RECOVERY,JOB_DATA
+    </sql>
+    <!-- 插入基础字段-->
+    <sql id="Base_Insert_Column_List">
+        SCHED_NAME,JOB_NAME,JOB_GROUP,DESCRIPTION,JOB_CLASS_NAME,IS_DURABLE,IS_NONCONCURRENT,IS_UPDATE_DATA,REQUESTS_RECOVERY,JOB_DATA
+    </sql>
+    <!-- 批量插入-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into qrtz_job_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Insert_Column_List"/>
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.schedName},#{item.jobName},#{item.jobGroup},#{item.description},#{item.jobClassName},#{item.isDurable},#{item.isNonconcurrent},#{item.isUpdateData},#{item.requestsRecovery},#{item.jobData}
+            </trim>
+        </foreach>
+    </insert>
+</mapper>

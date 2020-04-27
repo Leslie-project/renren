@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leslie.renren.dao.mybatis.IScheduleJobLogDao">
+
+    <resultMap id="BaseResultMap" type="com.leslie.renren.entity.ScheduleJobLogEntity">
+        <result column="log_id" property="logId" jdbcType="INTEGER"/>
+        <result column="job_id" property="jobId" jdbcType="INTEGER"/>
+        <result column="bean_name" property="beanName" jdbcType="VARCHAR"/>
+        <result column="params" property="params" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="error" property="error" jdbcType="VARCHAR"/>
+        <result column="times" property="times" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!-- 查询基础字段-->
+    <sql id="Base_Column_List">
+        log_id,job_id,bean_name,params,status,error,times,create_time
+    </sql>
+    <!-- 插入基础字段-->
+    <sql id="Base_Insert_Column_List">
+        log_id,job_id,bean_name,params,status,error,times,create_time
+    </sql>
+    <!-- 批量插入-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into schedule_job_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Insert_Column_List"/>
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.logId},#{item.jobId},#{item.beanName},#{item.params},#{item.status},#{item.error},#{item.times},#{item.createTime}
+            </trim>
+        </foreach>
+    </insert>
+</mapper>

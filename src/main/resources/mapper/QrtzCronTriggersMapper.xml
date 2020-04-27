@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leslie.renren.dao.mybatis.IQrtzCronTriggersDao">
+
+    <resultMap id="BaseResultMap" type="com.leslie.renren.entity.QrtzCronTriggersEntity">
+        <result column="SCHED_NAME" property="schedName" jdbcType="VARCHAR"/>
+        <result column="TRIGGER_NAME" property="triggerName" jdbcType="VARCHAR"/>
+        <result column="TRIGGER_GROUP" property="triggerGroup" jdbcType="VARCHAR"/>
+        <result column="CRON_EXPRESSION" property="cronExpression" jdbcType="VARCHAR"/>
+        <result column="TIME_ZONE_ID" property="timeZoneId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!-- 查询基础字段-->
+    <sql id="Base_Column_List">
+        SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,CRON_EXPRESSION,TIME_ZONE_ID
+    </sql>
+    <!-- 插入基础字段-->
+    <sql id="Base_Insert_Column_List">
+        SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,CRON_EXPRESSION,TIME_ZONE_ID
+    </sql>
+    <!-- 批量插入-->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into qrtz_cron_triggers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="Base_Insert_Column_List"/>
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.schedName},#{item.triggerName},#{item.triggerGroup},#{item.cronExpression},#{item.timeZoneId}
+            </trim>
+        </foreach>
+    </insert>
+</mapper>
