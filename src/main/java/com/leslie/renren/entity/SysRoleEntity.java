@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 import java.util.Date;
+import java.util.List;
+
 import org.hibernate.annotations.DynamicUpdate;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import javax.persistence.Table;
@@ -34,6 +36,9 @@ import javax.persistence.Id;
 public class SysRoleEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = -1L;
+
+	@TableField(exist=false)
+	private List<Long> menuIdList;
 
 	/**
 	 * 
@@ -75,6 +80,14 @@ public class SysRoleEntity implements java.io.Serializable {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
 	@Column(name = "create_time")
 	private Date createTime;
+
+	public List<Long> getMenuIdList() {
+		return menuIdList;
+	}
+
+	public void setMenuIdList(List<Long> menuIdList) {
+		this.menuIdList = menuIdList;
+	}
 
 	/**
 	 * 属性的公用set方法<br/>
