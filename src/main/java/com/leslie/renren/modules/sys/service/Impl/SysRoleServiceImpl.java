@@ -70,7 +70,7 @@ public class SysRoleServiceImpl implements SysRoleService {
         wrapper.eq("role_id",roleId);
         SysRoleEntity sysRoleEntity = sysRoleDao.selectById(roleId);
         List<Long> menuIdList = sysRoleMenuDao.selectList(wrapper);
-        sysRoleEntity.setMenuIdList(menuIdList);
+ //       sysRoleEntity.setMenuIdList(menuIdList);
         return Response.success(sysRoleEntity);
     }
 

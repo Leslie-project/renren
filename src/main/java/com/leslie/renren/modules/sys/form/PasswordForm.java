@@ -28,4 +28,10 @@ public class PasswordForm {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public PasswordForm(String password, String newPassword, String userName) {
+        this.password = password;
+        this.newPassword = newPassword;
+        this.userName = userName;
+    }
 }

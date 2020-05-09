@@ -37,8 +37,8 @@ public class SysRoleEntity implements java.io.Serializable {
 
 	private static final long serialVersionUID = -1L;
 
-	@TableField(exist=false)
-	private List<Long> menuIdList;
+//	@TableField(exist=false)
+//	private List<Long> menuIdList;
 
 	/**
 	 * 
@@ -81,13 +81,13 @@ public class SysRoleEntity implements java.io.Serializable {
 	@Column(name = "create_time")
 	private Date createTime;
 
-	public List<Long> getMenuIdList() {
-		return menuIdList;
-	}
-
-	public void setMenuIdList(List<Long> menuIdList) {
-		this.menuIdList = menuIdList;
-	}
+//	public List<Long> getMenuIdList() {
+//		return menuIdList;
+//	}
+//
+//	public void setMenuIdList(List<Long> menuIdList) {
+//		this.menuIdList = menuIdList;
+//	}
 
 	/**
 	 * 属性的公用set方法<br/>
